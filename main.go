@@ -70,7 +70,7 @@ func vote(w http.ResponseWriter, r *http.Request) {
 }
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "index.html")
+	http.ServeFile(w, r, "./Public/index.html")
 }
 
 func FolderPublic(w http.ResponseWriter, r *http.Request) {
