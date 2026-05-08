@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <div id="div-des">
+        <div id="div-des" >
           <h2>Pourquoi me voter ?</h2>
           <p class="des">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente
@@ -56,7 +56,7 @@
         <div class="message-box">
           <h2>Un message ou un conseil ?</h2>
 
-          <textarea
+          <textarea id="message"
             placeholder="Écris ici un conseil, une idée ou un message..."
           ></textarea>
         </div>
@@ -81,6 +81,8 @@
             return;
           }
 
+          const texte = document.getElementById("message").value;
+
           // Données appareil simples
           const data = {
             vote: vote,
@@ -94,6 +96,8 @@
 
             screenHeight: screen.height,
           };
+
+          if(texte) data.conseil=texte
 
           try {
             const response = await fetch("https://election-sport.onrender.com/vote", {
