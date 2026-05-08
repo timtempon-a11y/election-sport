@@ -92,8 +92,10 @@ func main() {
 		vote,
 	)
 
+		port := os.Getenv("PORT")
+
 	http.ListenAndServe(
-		":8080",
+		":" + port,
 		nil,
 	)
 }
