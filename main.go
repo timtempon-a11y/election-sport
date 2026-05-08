@@ -81,6 +81,25 @@ func FolderPublic(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func downloadData(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set(
+		"Content-Disposition",
+		`attachment; filename="data.json"`,
+	)
+
+	w.Header().Set(
+		"Content-Type",
+		"application/json",
+	)
+
+	http.ServeFile(
+		w,
+		r,
+		"data.json",
+	)
+}
+
 func main() {
 
 	http.HandleFunc("/", Home)
@@ -90,6 +109,12 @@ func main() {
 		FolderPublic,
 	)
 
+	
+    http.HandleFunc(
+	"/download",
+	downloadData,
+    )
+	
 	http.HandleFunc(
 		"/vote",
 		vote,
