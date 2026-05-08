@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Public/style.css" />
+    <title>Election Sport</title>
+  </head>
+
+  <body>
+    <div class="page">
+      <div class="hero">
+        <h1>Votez Tape jean-Morel</h1>
+
+        <div class="photos">
+          <div class="card" id="card1">
+            <img
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop"
+            />
+            <!-- <div class="label">Photo en costume</div> -->
+          </div>
+
+          <div class="card">
+            <img
+              src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop"
+            />
+            <!-- <div class="label">Photo en tenue de sport</div> -->
+          </div>
+
+          <div class="card" id="card3">
+            <img
+              src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200&auto=format&fit=crop"
+            />
+            <!-- <div class="label">Photo avec quelqu’un</div> -->
+          </div>
+        </div>
+
+        <div id="div-des">
+          <h2>Pourquoi me voter ?</h2>
+          <p class="des">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente
+            et nisi odio, corrupti eligendi velit repellat dolores debitis
+            obcaecati nostrum, dolorem architecto accusamus qui! Aliquid dolore
+            veniam eum similique? Molestias.
+          </p>
+        </div>
+
+        <div class="buttons">
+          <button class="vote">✅ Je vais te voter</button>
+
+          <button class="hesite">🤔 Je ne sais pas trop</button>
+
+          <button class="refuse">❌ désolé</button>
+        </div>
+
+        <div class="message-box">
+          <h2>Un message ou un conseil ?</h2>
+
+          <textarea
+            placeholder="Écris ici un conseil, une idée ou un message..."
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <a class="whatsapp" href="https://wa.me/22571214026" target="_blank">
+      M’écrire via whatsapp
+    </a>
+
+    <div class="formes">
+      <div class="carre noir"></div>
+      <div class="carre gris"></div>
+      <div class="carre bleu"></div>
+    </div>
+
+    <script>
+      function vote() {
+        async function envoyerVote(vote) {
+          // Empêche plusieurs votes localement
+          if (localStorage.getItem("a_vote")) {
+            alert("Vous avez déjà voté.");
+            return;
+          }
+
+          // Données appareil simples
+          const data = {
+            vote: vote,
+            userAgent: navigator.userAgent,
+
+            platform: navigator.platform,
+
+            language: navigator.language,
+
+            screenWidth: screen.width,
+
+            screenHeight: screen.height,
+          };
+
+          try {
+            const response = await fetch("save_vote.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+              localStorage.setItem("a_vote", "oui");
+
+              alert("Vote enregistré !");
+            } else {
+              alert(result.message);
+            }
+          } catch (error) {
+            console.log(error);
+
+            alert("Erreur serveur");
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
