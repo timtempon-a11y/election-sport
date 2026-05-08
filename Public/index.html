@@ -73,7 +73,7 @@
     </div>
 
     <script>
-      function vote() {
+      
         async function envoyerVote(vote) {
           // Empêche plusieurs votes localement
           if (localStorage.getItem("a_vote")) {
@@ -119,7 +119,6 @@
             alert("Erreur serveur");
           }
         }
-      }
     </script>
   </body>
 </html>
