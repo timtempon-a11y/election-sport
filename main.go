@@ -83,16 +83,19 @@ func FolderPublic(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 
-	http.HandleFunc("/home",Home)
-	http.HandleFunc("/Public",FolderPublic)
+	http.HandleFunc("/", Home)
 
-	
+	http.HandleFunc(
+		"/Public/",
+		FolderPublic,
+	)
+
 	http.HandleFunc(
 		"/vote",
 		vote,
 	)
 
-		port := os.Getenv("PORT")
+	port := os.Getenv("PORT")
 
 	http.ListenAndServe(
 		":" + port,
